@@ -1,0 +1,19 @@
+<jnt = 'http://www.jahia.org/jahia/nt/1.0'>
+<jmix = 'http://www.jahia.org/jahia/mix/1.0'>
+
+
+[jnt:masonryImageFromFolder] > jnt:content, jmix:list, jmix:multimediaContent
+ - source (weakreference, picker[type='folder']) mandatory internationalized < 'jnt:folder'
+ - allowSubDirectories (boolean)
+ - messageType (string, choicelist[masonryInitializer,resourceBundle]) = 'jahia'
+ - itemLimit (long)
+
+[jmix:masonryImageElvisConfig] > jmix:templateMixin mixin
+ extends = jnt:masonryImageFromFolder
+ - thumbnailImg (string)
+ - fullPageImg (string)
+ - colwidth (long)
+
+[jmix:masonryImageJahiaConfig] > jmix:templateMixin mixin
+ extends = jnt:masonryImageFromFolder
+ - thumbnailType (string) = 'thumbnail' < 'thumbnail', 'thumbnail2'

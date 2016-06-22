@@ -1,0 +1,8 @@
+.masonryGrid-item {
+    display: block;
+    float: left;
+}
+
+.masonryGrid-area{
+    overflow: auto;
+}
