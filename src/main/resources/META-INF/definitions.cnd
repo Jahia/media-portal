@@ -1,27 +1,27 @@
-<jnt = 'http://www.jahia.org/jahia/nt/1.0'>
 <jmix = 'http://www.jahia.org/jahia/mix/1.0'>
-
+<jnt = 'http://www.jahia.org/jahia/nt/1.0'>
 
 [jnt:masonryImageFromFolder] > jnt:content, jmix:list, jmix:multimediaContent
  - source (weakreference, picker[type='folder']) mandatory internationalized < 'jnt:folder'
  - allowSubDirectories (boolean)
- - messageType (string, choicelist[masonryInitializer,resourceBundle]) = 'jahia'
+ - providerType (string, choicelist[resourceBundle,masonryInitializer]) = 'jahia'
  - itemLimit (long)
 
 [jmix:masonryImageElvisConfig] > jmix:templateMixin mixin
  extends = jnt:masonryImageFromFolder
- - thumbnailImg (string)
+ - thumbnailImg (string) mandatory
  - fullPageImg (string)
  - colwidth (long)
 
 [jmix:masonryImageJahiaConfig] > jmix:templateMixin mixin
  extends = jnt:masonryImageFromFolder
- - thumbnailType (string) = 'thumbnail' < 'thumbnail', 'thumbnail2'
+ - thumbnailType  (string, choicelist[resourceBundle]) = 'thumbnail' < 'thumbnail', 'thumbnail2'
 
 [jnt:relatedByTag] > jnt:relatedTagging, jmix:bindedComponent
- - j:type (string, choicelist[nodetypes=ALL]) indexed=no
+ - j:type (string, choicelist[nodetypes='ALL']) indexed=no
  - tagSource (string, choicelist[relatedByTagInitializer,resourceBundle]) = 'bound' < 'bound', 'metadata', 'contentref'
 
- [jmix:contentRefenceTag] > jmix:templateMixin mixin
-  extends = jnt:relatedByTag
-  - contentRef (weakreference) mandatory
+[jmix:contentRefenceTag] > jmix:templateMixin mixin
+ extends = jnt:relatedByTag
+ - contentRef (weakreference) mandatory
+

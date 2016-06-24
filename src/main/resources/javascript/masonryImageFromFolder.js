@@ -4,7 +4,7 @@ $( document ).ready(function() {
     $container.imagesLoaded( function() {
         $container.masonry({
             itemSelector: '.masonryGrid-item',
-            columnWidth: parseInt($(this).attr('colwidth'))
+            columnWidth: parseInt($container.attr('colwidth'))
         });
     })
 

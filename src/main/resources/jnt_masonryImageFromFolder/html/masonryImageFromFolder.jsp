@@ -52,7 +52,10 @@
         <c:when test="${jcr:isNodeType(currentNode, 'jmix:masonryImageElvisConfig')}">
             <c:forEach items="${moduleMap.currentList}" var="imageChild">
                 <c:if test="${currentNode.properties.thumbnailImg.string eq imageChild.properties.previewFormatName.string}">
-                    <template:module node="${imageChild}" view="masonry.elvis" editable="false"/>
+                    <template:module node="${imageChild}" view="masonry.elvis" editable="false">
+                        <template:param name="thumbnailImg" value="${currentNode.properties.thumbnailImg.string}"/>
+                        <template:param name="fullPageImg" value="${currentNode.properties.fullPageImg.string}"/>
+                    </template:module>
                 </c:if>
             </c:forEach>
         </c:when>

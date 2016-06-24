@@ -18,9 +18,22 @@
 <%--@elvariable id="currentResource" type="org.jahia.services.render.Resource"--%>
 <%--@elvariable id="url" type="org.jahia.services.render.URLGenerator"--%>
 <c:url value='${currentNode.url}' context='/' var="imgURL"/>
+<c:choose>
+    <c:when test="${not empty fullPageImg}">
+        <c:set var="thumbnailFormat" value="FORMAT_${thumbnailImg}"/>
+        <c:set var="fullPageFormat" value="FORMAT_${fullPageImg}"/>
+        <c:set var="fullPageImagePath" value="${fn:replace(currentNode.path, thumbnailFormat, fullPageFormat)}" />
+    </c:when>
+    <c:otherwise>
+        <c:set value="${fn:split(currentNode.path,'.')}" var="separatorPosition" />
+        <c:set var="fileExtension" value="${separatorPosition[fn:length(separatorPosition)-1]}"/>
+        <c:set var="fullPageImagePath"
+               value="${fn:substring(currentNode.path,0, fn:indexOf(currentNode.path,'_EPF-'))}.${fileExtension}" />
+    </c:otherwise>
+</c:choose>
 
-<div class="masonryGrid-item grid-item--width2">
-    <a href="<c:url value='${currentNode.path}.image-temp.html' context='/'/>" title="${imageChild.displayableName}" data-gallery>
+<div class="masonryGrid-item">
+    <a href="<c:url value='${url.base}${fullPageImagePath}.image-temp.html' context='/'/>" title="${imageChild.displayableName}" data-gallery>
         <div class="wrapper">
             <img src="${imgURL}" alt="${imageChild.displayableName}">
         </div>

@@ -29,7 +29,7 @@
 
 
 
-<div class="masonryGrid-item grid-item--width2">
+<div class="masonryGrid-item">
     <a href="<c:url value='${url.base}${currentNode.path}.image-temp.html' context='/'/>" title="${currentNode.displayableName}" data-gallery>
         <c:if test="${fn:length(currentNode.thumbnails) ne 0}">
             <div class="wrapper">
