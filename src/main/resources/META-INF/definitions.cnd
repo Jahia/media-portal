@@ -17,3 +17,11 @@
 [jmix:masonryImageJahiaConfig] > jmix:templateMixin mixin
  extends = jnt:masonryImageFromFolder
  - thumbnailType (string) = 'thumbnail' < 'thumbnail', 'thumbnail2'
+
+[jnt:relatedByTag] > jnt:relatedTagging, jmix:bindedComponent
+ - j:type (string, choicelist[nodetypes=ALL]) indexed=no
+ - tagSource (string, choicelist[relatedByTagInitializer,resourceBundle]) = 'bound' < 'bound', 'metadata', 'contentref'
+
+ [jmix:contentRefenceTag] > jmix:templateMixin mixin
+  extends = jnt:relatedByTag
+  - contentRef (weakreference) mandatory

@@ -18,23 +18,21 @@
 <%--@elvariable id="currentResource" type="org.jahia.services.render.Resource"--%>
 <%--@elvariable id="url" type="org.jahia.services.render.URLGenerator"--%>
 
-    <c:choose>
-        <c:when test="${thumbnailtype eq 'thumbnail'}">
-            <c:set value="${currentNode.thumbnailUrls.thumbnail}" var="thumbnailURL"/>
-        </c:when>
-        <c:otherwise>
-            <c:set value="${currentNode.thumbnailUrls.thumbnail2}" var="thumbnailURL"/>
-        </c:otherwise>
-    </c:choose>
-
-
-
-<div class="masonryGrid-item grid-item--width2">
-    <a href="<c:url value='${url.base}${currentNode.path}.image-temp.html' context='/'/>" title="${currentNode.displayableName}" data-gallery>
-        <c:if test="${fn:length(currentNode.thumbnails) ne 0}">
-            <div class="wrapper">
-                <img src="<c:url value='${thumbnailURL}' context='/'/>" alt="${currentNode.displayableName}">
-            </div>
-        </c:if>
-    </a>
+<div>
+    <div class="headline"><h2><fmt:message key="mediaportal.metadata"/></h2></div>
+    <!-- Metadata -->
+    <ul class="list-unstyled margin-bottom-20">
+        <li>
+            <h5><fmt:message key="mediaportal.title"/>:</h5>
+            <small>${currentNode.displayableName}</small>
+        </li><li>
+        <h5><fmt:message key="mediaportal.width"/>:</h5>
+        <small>${currentNode.properties['j:width'].string} px </small>
+    </li><li>
+        <h5><fmt:message key="mediaportal.height"/>:</h5>
+        <small>${currentNode.properties['j:height'].string} px </small>
+    </li>
+    </ul>
 </div>
+
+

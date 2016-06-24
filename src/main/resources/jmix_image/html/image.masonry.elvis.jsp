@@ -20,7 +20,7 @@
 <c:url value='${currentNode.url}' context='/' var="imgURL"/>
 
 <div class="masonryGrid-item grid-item--width2">
-    <a href="${imgURL}" title="${imageChild.displayableName}" data-gallery>
+    <a href="<c:url value='${currentNode.path}.image-temp.html' context='/'/>" title="${imageChild.displayableName}" data-gallery>
         <div class="wrapper">
             <img src="${imgURL}" alt="${imageChild.displayableName}">
         </div>

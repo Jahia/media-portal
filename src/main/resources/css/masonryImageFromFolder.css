@@ -6,3 +6,9 @@
 .masonryGrid-area{
     overflow: auto;
 }
+
+.tagged a.delete {
+    border: none;
+    padding: 10px 10px;
+    float: right;
+}

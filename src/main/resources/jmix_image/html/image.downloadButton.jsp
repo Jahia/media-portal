@@ -18,23 +18,9 @@
 <%--@elvariable id="currentResource" type="org.jahia.services.render.Resource"--%>
 <%--@elvariable id="url" type="org.jahia.services.render.URLGenerator"--%>
 
-    <c:choose>
-        <c:when test="${thumbnailtype eq 'thumbnail'}">
-            <c:set value="${currentNode.thumbnailUrls.thumbnail}" var="thumbnailURL"/>
-        </c:when>
-        <c:otherwise>
-            <c:set value="${currentNode.thumbnailUrls.thumbnail2}" var="thumbnailURL"/>
-        </c:otherwise>
-    </c:choose>
-
-
-
-<div class="masonryGrid-item grid-item--width2">
-    <a href="<c:url value='${url.base}${currentNode.path}.image-temp.html' context='/'/>" title="${currentNode.displayableName}" data-gallery>
-        <c:if test="${fn:length(currentNode.thumbnails) ne 0}">
-            <div class="wrapper">
-                <img src="<c:url value='${thumbnailURL}' context='/'/>" alt="${currentNode.displayableName}">
-            </div>
-        </c:if>
+<div class="margin-bottom-20">
+    <a class="btn rounded btn-block btn-u" href="<c:url value='${currentNode.url}' context='/'/>"  download="${currentNode.displayableName}">
+        <i class="fa fa-download"></i>&nbsp; <fmt:message key="mediaportal.download"/>
     </a>
 </div>
+
