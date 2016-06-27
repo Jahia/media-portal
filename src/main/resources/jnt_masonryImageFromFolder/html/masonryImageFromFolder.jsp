@@ -46,6 +46,7 @@
     </c:otherwise>
 </c:choose>
 
+<template:addResources><style>.masonryGrid-item, .masonryGrid img  {width: ${colwidth}px;}</style></template:addResources>
 
 <div class="masonryGrid-area" colwidth="${colwidth}">
     <c:choose>
