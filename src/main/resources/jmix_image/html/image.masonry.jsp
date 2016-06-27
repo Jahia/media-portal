@@ -30,11 +30,9 @@
 
 
 <div class="masonryGrid-item">
-    <a href="<c:url value='${url.base}${currentNode.path}.image-temp.html' context='/'/>" title="${currentNode.displayableName}" data-gallery>
+    <a href="<c:url value='${url.base}${currentNode.path}.image-temp.html' context='/'/>" title="${currentNode.displayableName}" >
         <c:if test="${fn:length(currentNode.thumbnails) ne 0}">
-            <div class="wrapper">
-                <img src="<c:url value='${thumbnailURL}' context='/'/>" alt="${currentNode.displayableName}">
-            </div>
+                <img class="img-responsive" src="<c:url value='${thumbnailURL}' context='/'/>" alt="${currentNode.displayableName}">
         </c:if>
     </a>
 </div>

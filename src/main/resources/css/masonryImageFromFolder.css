@@ -3,6 +3,10 @@
     float: left;
 }
 
+.masonryGrid-item img{
+    width: 100%;
+}
+
 .masonryGrid-area{
     overflow: auto;
 }

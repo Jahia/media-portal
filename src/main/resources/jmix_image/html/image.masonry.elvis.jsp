@@ -34,9 +34,7 @@
 
 <div class="masonryGrid-item">
     <a href="<c:url value='${url.base}${fullPageImagePath}.image-temp.html' context='/'/>" title="${imageChild.displayableName}" data-gallery>
-        <div class="wrapper">
-            <img src="${imgURL}" alt="${imageChild.displayableName}">
-        </div>
+        <img class="img-responsive" src="${imgURL}" alt="${imageChild.displayableName}">
     </a>
 </div>
 
