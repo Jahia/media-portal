@@ -17,7 +17,10 @@
 <template:addResources type="css" resources="pagetagging.css"/>
 <template:addResources type="css" resources="tagged.css"/>
 <template:addResources type="css" resources="masonryImageFromFolder.css"/>
-
+<c:if test="${not empty param['portalID']}">
+    <jcr:node var="portal" uuid="${param['portalID']}"/>
+    <c:set var="portalPage" value="${jcr:findDisplayableNode(portal,renderContext )}"/>
+</c:if>
 
 <c:set var="boundComponent"
        value="${uiComponents:getBindedComponent(currentNode, renderContext, 'j:bindedComponent')}"/>
@@ -55,7 +58,7 @@
                         <ul class="list-inline tags-v2 margin-bottom-20">
                             <c:forEach items="${assignedTags}" var="tag" varStatus="status">
                                 <li>
-                                    <a href="#"> ${fn:escapeXml(tag.string)} </a>
+                                    <a href="<c:url value="${url.base}${portalPage.url}" context="/"/>?tags=${fn:escapeXml(tag.string)}"> ${fn:escapeXml(tag.string)} </a>
                                 </li>
                             </c:forEach>
                         </ul>

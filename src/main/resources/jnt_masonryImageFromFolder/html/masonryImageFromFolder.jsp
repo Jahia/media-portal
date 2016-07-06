@@ -23,7 +23,21 @@
 <template:addResources type="javascript" resources="imagesloaded.pkgd.js"/>
 <template:addResources type="css" resources="masonryImageFromFolder.css"/>
 
+<c:set var="currentPage" value="${jcr:findDisplayableNode(currentNode,renderContext )}"/>
+<div class="row">
+    <form action="<c:url value="${url.base}${currentPage.url}" context="/"/>" method="GET" class="tagfilterform">
+        <input name="tags" value="${param['tags']}"/>
+        <input type="submit" />
+    </form>
 
+    <ul class="list-inline tags-v2">
+        <c:forEach items="${moduleMap.taglist}" var="tag" varStatus="status">
+            <c:if test="${not empty tag}">
+                <li> <a>${functions:sqlencode(tag)}</a></li>
+            </c:if>
+        </c:forEach>
+    </ul>
+</div>
 <c:if test="${renderContext.editMode}">
     <h1>${currentNode.displayableName}</h1>
 </c:if>
@@ -56,6 +70,7 @@
                     <template:module node="${imageChild}" view="masonry.elvis" editable="false">
                         <template:param name="thumbnailImg" value="${currentNode.properties.thumbnailImg.string}"/>
                         <template:param name="fullPageImg" value="${currentNode.properties.fullPageImg.string}"/>
+                        <template:param name="portalID" value="${currentNode.identifier}"/>
                     </template:module>
                 </c:if>
             </c:forEach>
@@ -65,6 +80,7 @@
                 <c:if test="${not jcr:isNodeType(imageChild, 'elvismix:file')}">
                     <template:module node="${imageChild}" view="masonry" editable="false">
                         <template:param name="thumbnailtype" value="${currentNode.properties.thumbnailType.string}" />
+                        <template:param name="portalID" value="${currentNode.identifier}"/>
                     </template:module>
                 </c:if>
             </c:forEach>

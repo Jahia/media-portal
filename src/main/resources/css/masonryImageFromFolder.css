@@ -16,3 +16,8 @@
     padding: 10px 10px;
     float: right;
 }
+
+.tagfilterform{
+    float: left;
+    margin: 4px;
+}

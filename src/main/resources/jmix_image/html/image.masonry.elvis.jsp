@@ -33,7 +33,7 @@
 </c:choose>
 
 <div class="masonryGrid-item">
-    <a href="<c:url value='${url.base}${fullPageImagePath}.image-temp.html' context='/'/>" title="${imageChild.displayableName}" data-gallery>
+    <a href="<c:url value='${url.base}${fullPageImagePath}.image-temp.html?portalID=${portalID}' context='/'/>" title="${imageChild.displayableName}" data-gallery>
         <img class="img-responsive" src="${imgURL}" alt="${imageChild.displayableName}">
     </a>
 </div>
