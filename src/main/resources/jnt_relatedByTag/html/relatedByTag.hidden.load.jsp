@@ -35,7 +35,7 @@
     </c:choose>
 
     <jcr:nodeProperty node="${tagSourceNode}" name="j:tagList" var="assignedTags"/>
-	<jcr:nodeProperty node="${tagSourceNode}" name='j:nbOfResult' var="nbOfResult"/>
+	<jcr:nodeProperty node="${currentNode}" name='j:nbOfResult' var="nbOfResult"/>
 
 
     <query:definition var="listQuery" limit="${nbOfResult.long}">

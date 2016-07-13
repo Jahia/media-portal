@@ -29,7 +29,7 @@
                                 <section--container--row--grid-main jcr:primaryType="jnt:contentList">
                                     <main-resource-display j:mainResourceView="responsive"
                                                jcr:primaryType="jnt:mainResourceDisplay"/>
-                                    <relatedbytag j:nbOfResult="5"
+                                    <relatedbytag j:nbOfResult="8"
                                       j:type="jmix:image"
                                       jcr:primaryType="jnt:relatedByTag"
                                       tagSource="bound"/>
@@ -41,6 +41,8 @@
                                     <display-tags j:view="mediaportal"
                                       jcr:mixinTypes="jmix:renderable"
                                       jcr:primaryType="jnt:displayTags"/>
+                                    <main-resource-display-2 j:mainResourceView="backButton"
+                                                 jcr:primaryType="jnt:mainResourceDisplay"/>
                                 </section--container--row--grid-side>
                             </section--container--row--grid>
                         </pagecontent>
