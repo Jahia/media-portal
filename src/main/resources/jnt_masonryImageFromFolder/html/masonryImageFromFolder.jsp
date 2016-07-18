@@ -17,6 +17,7 @@
 <%--@elvariable id="renderContext" type="org.jahia.services.render.RenderContext"--%>
 <%--@elvariable id="currentResource" type="org.jahia.services.render.Resource"--%>
 <%--@elvariable id="url" type="org.jahia.services.render.URLGenerator"--%>
+
 <template:include view="hidden.header"/>
 <template:addResources type="javascript" resources="masonry.pkgd.min.js"/>
 <template:addResources type="javascript" resources="masonryImageFromFolder.js"/>
@@ -24,7 +25,7 @@
 <template:addResources type="css" resources="masonryImageFromFolder.css"/>
 
 <%-- We can reuse the code for the views --%>
-<template:module view="hidden.tags-elvisConfig"></template:module>
+<template:module view="hidden.tags-elvisConfig" node="${currentNode}"></template:module>
 
 <template:addResources><style>.masonryGrid-item, .masonryGrid img  {width: ${colwidth}px;}</style></template:addResources>
 

@@ -48,7 +48,8 @@
 </c:if>
 
 <%-- We can reuse the code for the views --%>
-<template:module view="hidden.tags-elvisConfig"></template:module>
+<template:module view="hidden.tags-elvisConfig" node="${currentNode}"></template:module>
+
 
 <div id="card-tiles">
     <c:choose>
