@@ -17,11 +17,12 @@
 <%--@elvariable id="renderContext" type="org.jahia.services.render.RenderContext"--%>
 <%--@elvariable id="currentResource" type="org.jahia.services.render.Resource"--%>
 <%--@elvariable id="url" type="org.jahia.services.render.URLGenerator"--%>
-
+<template:include view="hidden.header"/>
 <c:set var="currentPage" value="${jcr:findDisplayableNode(currentNode,renderContext )}"/>
 <div class="row">
     <form action="<c:url value="${url.base}${currentPage.url}" context="/"/>" method="GET" class="tagfilterform">
-        <input class="tags" name="tags"/>
+        <input class="currenttag" type="text"  value=""/>
+        <input class="tags" type="hidden" name="tags" value=""/>
         <input class="previoustags"  type="hidden" name="previoustags" value="${param['tags']}"/>
         <input type="submit" value="<fmt:message key="mediaportal.add"/>" />
     </form>
