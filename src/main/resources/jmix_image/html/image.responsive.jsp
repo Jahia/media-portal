@@ -18,4 +18,6 @@
 <%--@elvariable id="currentResource" type="org.jahia.services.render.Resource"--%>
 <%--@elvariable id="url" type="org.jahia.services.render.URLGenerator"--%>
 
-<img class="img-responsive" src="<c:url value='${currentNode.url}' context='/'/>" alt="${currentNode.displayableName}">
+<img id="picture" class="img-responsive" src="<c:url value='${currentNode.url}' context='/'/>" alt="${currentNode.displayableName}">
+
+<template:include view="photoswipe"/>
