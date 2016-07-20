@@ -18,8 +18,13 @@
 <%--@elvariable id="currentResource" type="org.jahia.services.render.Resource"--%>
 <%--@elvariable id="url" type="org.jahia.services.render.URLGenerator"--%>
 <c:set value="${currentNode.thumbnailUrls.thumbnail}" var="thumbnailURL"/>
+<c:if test="${not empty param['portalID']}">
+    <c:set var="portalID" value="${param['portalID']}"/>
+</c:if>
+
+
 <li>
-    <a href="<c:url value='${currentNode.path}.image-temp.html' context='/'/>" rel="gallery" class="fancybox img-hover-v2" title="${currentNode.displayableName}">
+    <a href="<c:url value='${currentNode.path}.image-temp.html?portalID=${portalID}' context='/'/>" rel="gallery" class="fancybox img-hover-v2" title="${currentNode.displayableName}">
         <span><img class="img-responsive" src="<c:url value='${thumbnailURL}' context='/'/>" alt=""></span>
     </a>
 </li>
