@@ -25,7 +25,8 @@
 <template:addResources type="css" resources="masonryImageFromFolder.css"/>
 
 <%-- We can reuse the code for the views --%>
-<template:module view="hidden.tags-elvisConfig" node="${currentNode}"></template:module>
+<template:include view="hidden.tags-elvisConfig" />
+
 
 <template:addResources><style>.masonryGrid-item, .masonryGrid img  {width: ${colwidth}px;}</style></template:addResources>
 

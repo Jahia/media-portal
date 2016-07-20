@@ -20,35 +20,19 @@
 <template:include view="hidden.header"/>
 <template:addResources type="css" resources="masonryImageFromFolder.css"/>
 <template:addResources type="css" resources="tiles.css"/>
-<template:addResources type="javascript" resources="jquery.tile.js"/>
+<template:addResources type="javascript" resources="masonryImageFromFolder.js"/>
 
 <c:if test="${not renderContext.editMode}">
-    <template:addResources>
-        <script>
-            $(function() {
-                $('#card-tiles').justifiedGallery({
-                    rowHeight : 150,
-                    margins : 30,
-                    fixedHeight: false
-                });
-            });
-        </script>
-    </template:addResources>
+    <template:addResources type="javascript" resources="jquery.tile.js"/>
+    <template:addResources type="javascript" resources="masonryImageFromFolder.tile.js"/>
 </c:if>
 <%-- Some edit mode styling --%>
 <c:if test="${renderContext.editMode}">
-    <style>
-        #card-tiles{
-            display: flex;
-        }
-        .thumbnail-img {
-            float: left;
-        }
-        </style>
+    <style> #card-tiles{display: flex;} .thumbnail-img {float: left;} </style>
 </c:if>
 
 <%-- We can reuse the code for the views --%>
-<template:module view="hidden.tags-elvisConfig" node="${currentNode}"></template:module>
+<template:include view="hidden.tags-elvisConfig" />
 
 
 <div id="card-tiles">

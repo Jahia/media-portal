@@ -1,12 +1,14 @@
 
 $( document ).ready(function() {
     var $container = $('.masonryGrid-area');
-    $container.imagesLoaded( function() {
-        $container.masonry({
-            itemSelector: '.masonryGrid-item',
-            columnWidth: parseInt($container.attr('colwidth'))
+    try {
+        $container.imagesLoaded(function () {
+            $container.masonry({
+                itemSelector: '.masonryGrid-item',
+                columnWidth: parseInt($container.attr('colwidth'))
+            });
         });
-    })
+    }catch(error){}
 
     $('.tagfilterform').submit(function() {
         var oldtags = $(this).find('.previoustags').val();

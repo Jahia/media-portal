@@ -17,22 +17,23 @@
 <%--@elvariable id="renderContext" type="org.jahia.services.render.RenderContext"--%>
 <%--@elvariable id="currentResource" type="org.jahia.services.render.Resource"--%>
 <%--@elvariable id="url" type="org.jahia.services.render.URLGenerator"--%>
+<c:choose>
+    <c:when test="${thumbnailtype eq 'thumbnail'}">
+        <c:set value="${currentNode.thumbnailUrls.thumbnail}" var="thumbnailURL"/>
+    </c:when>
+    <c:otherwise>
+        <c:set value="${currentNode.thumbnailUrls.thumbnail2}" var="thumbnailURL"/>
+    </c:otherwise>
+</c:choose>
 
-    <c:choose>
-        <c:when test="${thumbnailtype eq 'thumbnail'}">
-            <c:set value="${currentNode.thumbnailUrls.thumbnail}" var="thumbnailURL"/>
-        </c:when>
-        <c:otherwise>
-            <c:set value="${currentNode.thumbnailUrls.thumbnail2}" var="thumbnailURL"/>
-        </c:otherwise>
-    </c:choose>
-
-
+<c:if test="${not empty renderContext.request.parameterMap['portalID']}">
+    <c:set value="${renderContext.request.parameterMap['portalID'][0]}" var="portalID"/>
+</c:if>
 
 <div class="masonryGrid-item">
     <a href="<c:url value='${url.base}${currentNode.path}.image-temp.html?portalID=${portalID}' context='/'/>" title="${currentNode.displayableName}" >
         <c:if test="${fn:length(currentNode.thumbnails) ne 0}">
-                <img class="img-responsive" src="<c:url value='${thumbnailURL}' context='/'/>" alt="${currentNode.displayableName}">
+            <img class="img-responsive" src="<c:url value='${thumbnailURL}' context='/'/>" alt="${currentNode.displayableName}">
         </c:if>
     </a>
 </div>

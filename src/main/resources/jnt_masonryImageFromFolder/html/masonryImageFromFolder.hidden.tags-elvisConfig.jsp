@@ -63,3 +63,6 @@
         </c:choose>
     </c:otherwise>
 </c:choose>
+
+
+<c:set target="${moduleMap}" property="colwidth" value="${colwidth}" />
