@@ -6,9 +6,8 @@ $(document).ready(function() {
         var $src = $('#picture').attr('src');
 
         /* Get image size */
-        var img = document.getElementById('picture');
-        $width = img.clientWidth;
-        $height = img.clientHeight;
+        $width  = $("#picture").attr('data-width');
+        $height = $("#picture").attr('data-height');
 
         var item = {
             src: $src,
