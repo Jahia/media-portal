@@ -25,7 +25,10 @@ $( document ).ready(function() {
     });
 
 });
-
+//endsWith function for ie support
+function endsWith(str, suffix) {
+    return str.indexOf(suffix, str.length - suffix.length) !== -1;
+}
 /** removeFilter function:
  *            remove filter by key.
  **/
@@ -36,7 +39,7 @@ function removeFilter(searchUri, key) {
 
     filters.forEach(function(entry) {
         if(entry != key){
-            if(!uri.endsWith('=')){uri = uri + '+'}
+            if(!endsWith(uri,'=')){uri = uri + '+'}
             uri = uri + entry;
             filterCounter++;
         }
@@ -44,4 +47,3 @@ function removeFilter(searchUri, key) {
 
     return filterCounter > 0 ? uri : '';
 }
-
