@@ -1,7 +1,8 @@
 $(function() {
     $('#card-tiles').justifiedGallery({
-        rowHeight : 100,
-        margins : 30,
+        rowHeight : 200,
+        margins : 3,
+        maxRowHeight:'120%',
         fixedHeight: false
     });
 });
