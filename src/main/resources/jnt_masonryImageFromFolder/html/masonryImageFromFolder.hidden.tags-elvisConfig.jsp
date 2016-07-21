@@ -19,28 +19,31 @@
 <%--@elvariable id="url" type="org.jahia.services.render.URLGenerator"--%>
 <template:include view="hidden.header"/>
 <c:set var="currentPage" value="${jcr:findDisplayableNode(currentNode,renderContext )}"/>
+
 <div class="row">
-    <form action="<c:url value="${url.base}${currentPage.url}" context="/"/>" method="GET" class="tagfilterform">
-        <input class="currenttag" type="text"  value=""/>
-        <input class="tags" type="hidden" name="tags" value=""/>
-        <input class="previoustags"  type="hidden" name="previoustags" value="${param['tags']}"/>
-        <input type="submit" value="<fmt:message key="mediaportal.add"/>" />
-    </form>
+    <div class="form-group">
+        <form action="<c:url value="${url.base}${currentPage.url}" context="/"/>" method="GET" class="tagfilterform">
+            <input class="currenttag" type="text"  value=""/>
+            <input class="tags" type="hidden" name="tags" value=""/>
+            <input class="previoustags"  type="hidden" name="previoustags" value="${param['tags']}"/>
+            <input type="submit" class="tagButton" value="<fmt:message key="mediaportal.add"/>" />
+        </form>
 
-    <form action="<c:url value="${url.base}${currentPage.url}" context="/"/>" method="GET" class="resettagform">
-        <input type="submit" value="<fmt:message key="mediaportal.reset"/>" />
-    </form>
-
+        <form action="<c:url value="${url.base}${currentPage.url}" context="/"/>" method="GET" class="resettagform">
+            <input type="submit" class="tagButton" value="<fmt:message key="mediaportal.reset"/>" />
+        </form>
+    </div>
     <ul class="list-inline tags-v2">
         <c:forEach items="${moduleMap.taglist}" var="tag" varStatus="status">
             <c:if test="${not empty tag}">
                 <li>
-                    <a>${functions:sqlencode(tag)}</a>
-                    <a class="removeTag" tag="${functions:sqlencode(tag)}" href="#">X</a>
+                    <a   href="#">${functions:sqlencode(tag)}</a>
+                    <span class="removeTag boxclose" tag="${functions:sqlencode(tag)}"></span>
                 </li>
             </c:if>
         </c:forEach>
     </ul>
+
 </div>
 <c:if test="${renderContext.editMode}">
     <h1>${currentNode.displayableName}</h1>
