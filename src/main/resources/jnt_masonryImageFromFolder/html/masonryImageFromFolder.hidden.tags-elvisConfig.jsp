@@ -38,7 +38,7 @@
             <c:if test="${not empty tag}">
                 <li>
                     <a   href="#">${functions:sqlencode(tag)}</a>
-                    <span class="removeTag boxclose" tag="${functions:sqlencode(tag)}"></span>
+                    <span class="removeTag boxclose" title="<fmt:message key="jnt_masonryImageFromfolder.tag-elvisConfig.remove"/>" tag="${functions:sqlencode(tag)}"></span>
                 </li>
             </c:if>
         </c:forEach>
