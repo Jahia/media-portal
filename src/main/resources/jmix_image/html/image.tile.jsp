@@ -27,6 +27,10 @@
     </c:otherwise>
 </c:choose>
 
+<c:if test="${not empty renderContext.request.parameterMap['portalID']}">
+    <c:set value="${renderContext.request.parameterMap['portalID'][0]}" var="portalID"/>
+</c:if>
+
 <div class="thumbnail-img ">
     <a href="<c:url value='${url.base}${currentNode.path}.image-temp.html?portalID=${portalID}' context='/'/>" title="${currentNode.displayableName}">
         <c:if test="${fn:length(currentNode.thumbnails) ne 0}">

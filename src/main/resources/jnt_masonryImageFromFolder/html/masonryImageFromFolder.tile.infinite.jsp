@@ -19,34 +19,54 @@
 <%--@elvariable id="url" type="org.jahia.services.render.URLGenerator"--%>
 <template:include view="hidden.header"/>
 <template:addResources type="css" resources="masonryImageFromFolder.css"/>
+<template:addResources type="css" resources="tiles.css"/>
+<template:addResources type="javascript" resources="masonryImageFromFolder.js"/>
+<template:addResources type="javascript" resources="jquery.tile.js"/>
+<template:addResources type="javascript" resources="tile-infinite.js"/>
 
-<c:if test="${not renderContext.editMode}">
-    <template:addResources type="javascript" resources="masonry.pkgd.min.js"/>
-    <template:addResources type="javascript" resources="masonryImageFromFolder.js"/>
-    <template:addResources type="javascript" resources="masonry-infinite.js"/>
-    <template:addResources type="javascript" resources="imagesloaded.pkgd.js"/>
-</c:if>
 <%-- Some edit mode styling --%>
 <c:if test="${renderContext.editMode}">
-    <style> .grid{display: flex;}</style>
+    <style>
+        #card-tiles{
+            display: flex;
+        }
+        .thumbnail-img {
+            float: left;
+        }
+        </style>
 </c:if>
+
+<c:if test="${not renderContext.editMode}">
+    <template:addResources>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('#card-tiles').justifiedGallery({
+                    rowHeight : 200,
+                    margins : 3,
+                    maxRowHeight:'120%',
+                    fixedHeight: false
+                });
+            });
+        </script>
+    </template:addResources>
+</c:if>
+
+
+
 <%-- We can reuse the code for the views --%>
 <template:include view="hidden.tags-elvisConfig" />
-
-<%-- The column width for the picture --%>
-<c:set value="${moduleMap.colwidth}" var="colwidth"/>
-<template:addResources><style>.masonryGrid-item, .masonryGrid img  {width: ${colwidth}px;}</style></template:addResources>
 
 <%-- How many items to show at first? --%>
 <c:set value="20" var="startItems"/>
 <%-- How many items to load? lets --%>
 <c:set value="5" var="loadItems"/>
-<div class="grid" colwidth="${colwidth}">
+
+<div id="card-tiles">
     <c:choose>
         <c:when test="${jcr:isNodeType(currentNode, 'jmix:masonryImageElvisConfig')}">
-            <c:forEach items="${moduleMap.currentList}" var="imageChild" end="${startItems-1}">
+            <c:forEach items="${moduleMap.currentList}" var="imageChild"  end="${startItems-1}">
                 <c:if test="${currentNode.properties.thumbnailImg.string eq imageChild.properties.previewFormatName.string}">
-                    <template:module node="${imageChild}" view="masonry.elvis" editable="false">
+                    <template:module node="${imageChild}" view="tile.elvis" editable="false">
                         <template:param name="thumbnailImg" value="${currentNode.properties.thumbnailImg.string}"/>
                         <template:param name="fullPageImg" value="${currentNode.properties.fullPageImg.string}"/>
                         <template:param name="portalID" value="${currentNode.identifier}"/>
@@ -57,49 +77,40 @@
         <c:otherwise>
             <c:forEach items="${moduleMap.currentList}" var="imageChild" end="${startItems-1}">
                 <c:if test="${not jcr:isNodeType(imageChild, 'elvismix:file')}">
-                    <template:module node="${imageChild}" view="masonry" editable="false">
+                    <template:module node="${imageChild}" view="tile" editable="false">
                         <template:param name="thumbnailtype" value="${currentNode.properties.thumbnailType.string}" />
                         <template:param name="portalID" value="${currentNode.identifier}"/>
                     </template:module>
                 </c:if>
             </c:forEach>
-            <c:if test="${not renderContext.editMode}">
-                <template:addResources>
-                    <script type="text/javascript">
-                        var startItems = ${startItems}
-                        var load = ${loadItems}
-                        var docLoading = false;
-                        var url = [
-                            <c:forEach items="${moduleMap.currentList}" var="itemIn"  varStatus="loop">
-                                "${url.base}${itemIn.path}.masonry.html.ajax?portalID=${currentNode.identifier}"
-                                <c:if test="${!loop.last}">,</c:if>
-                            </c:forEach>];
-                        var itemsLeft = url.length;
-                        $(document).ready(function() {
-                            var $grid = $('.grid').masonry({
-                                // specify itemSelector so stamps do get laid out
-                                itemSelector: '.masonryGrid-item',
-                                columnWidth: ${moduleMap.colwidth}
-                            });
-                            // layout Isotope after each image loads
-                            $grid.imagesLoaded().progress( function() {
-                                $grid.masonry();
-                            });
-                            $(window).scroll(function () {
-                                if (!docLoading && $(window).scrollTop() + $(window).height() == $(document).height()) {
+            <template:addResources>
+                <script type="text/javascript">
+                    var startItems = ${startItems}
+                    var load = ${loadItems}
+                    var docLoading = false;
+                    var url = [
+                        <c:forEach items="${moduleMap.currentList}" var="itemIn"  varStatus="loop">
+                        "${url.base}${itemIn.path}.masonry.html.ajax?portalID=${currentNode.identifier}"
+                        <c:if test="${!loop.last}">,</c:if>
+                        </c:forEach>];
+                    var itemsLeft = url.length;
 
-                                    //stop flag
-                                    docLoading = true;
-                                    //Get next series of items to show
-                                    getNext(startItems, load, $grid, ${startItems});
-                                }
-                            });
+                    $(document).ready(function() {
+                        var $grid = $('#card-tiles');
+
+                        $(window).scroll(function () {
+                            if (!docLoading && $(window).scrollTop() + $(window).height() == $(document).height()) {
+                                //Get next series of items to show
+                                getNext(startItems, load, $grid, ${startItems});
+                            }
                         });
-                   </script>
-                </template:addResources>
-            </c:if>
+                    });
+                </script>
+            </template:addResources>
         </c:otherwise>
     </c:choose>
 </div>
+
 <div class="clear"></div>
 <div class="clear"></div>
+

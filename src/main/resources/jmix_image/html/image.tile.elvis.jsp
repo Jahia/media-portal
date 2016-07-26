@@ -32,6 +32,10 @@
     </c:otherwise>
 </c:choose>
 
+<c:if test="${not empty renderContext.request.parameterMap['portalID']}">
+    <c:set value="${renderContext.request.parameterMap['portalID'][0]}" var="portalID"/>
+</c:if>
+
 <div class="thumbnail-img">
     <a href="<c:url value='${url.base}${fullPageImagePath}.image-temp.html?portalID=${portalID}' context='/'/>" title="${imageChild.displayableName}" data-gallery>
         <img class="img-responsive" src="${imgURL}" alt="${imageChild.displayableName}">
