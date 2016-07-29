@@ -42,8 +42,8 @@
                     </c:forEach>
                 </c:when>
                 <c:otherwise>
-                    <c:forEach items="${moduleMap.currentList}" var="imageChild">
-                        <c:if test="${not jcr:isNodeType(imageChild, 'elvismix:file') and subchild != moduleMap.tagSourceNode}">
+                    <c:forEach items="${moduleMap.currentList}" var="subchild">
+                        <c:if test="${not jcr:isNodeType(subchild, 'elvismix:file') and subchild != moduleMap.tagSourceNode}">
                             <template:module node="${subchild}" view="relatedByTag"/>
                         </c:if>
                     </c:forEach>

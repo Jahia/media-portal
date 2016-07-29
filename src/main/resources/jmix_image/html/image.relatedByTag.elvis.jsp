@@ -35,8 +35,10 @@
 <c:if test="${not empty renderContext.request.parameterMap['portalID']}">
     <c:set value="${renderContext.request.parameterMap['portalID'][0]}" var="portalID"/>
 </c:if>
-<div class="masonryGrid-item">
-    <a href="<c:url value='${url.base}${fullPageImagePath}.image-temp.html?portalID=${portalID}' context='/'/>" rel="gallery" class="fancybox img-hover-v2" title="${imageChild.displayableName}" data-gallery>
-        <span><img class="img-responsive" src="<c:url value='${imgURL}' context='/'/>" alt="${imageChild.displayableName}"></span>
-    </a>
-</div>
+<li>
+    <div class="masonryGrid-item">
+        <a href="<c:url value='${url.base}${fullPageImagePath}.image-temp.html?portalID=${portalID}' context='/'/>" rel="gallery" class="fancybox img-hover-v2" title="${imageChild.displayableName}" data-gallery>
+            <span><img class="img-responsive" src="<c:url value='${imgURL}' context='/'/>" alt="${imageChild.displayableName}"></span>
+        </a>
+    </div>
+</li>
