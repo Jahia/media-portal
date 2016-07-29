@@ -10,7 +10,7 @@
 [jmix:masonryImageElvisConfig] > jmix:templateMixin mixin
  extends = jnt:masonryImageFromFolder
  - thumbnailImg (string) mandatory
- - fullPageImg (string)
+ - fullPageImg (string) mandatory
  - colwidth (long)
 
 [jmix:masonryImageJahiaConfig] > jmix:templateMixin mixin

@@ -16,15 +16,39 @@
 
 <template:include view="hidden.header"/>
 
+<c:if test="${not empty param['portalID']}">
+    <jcr:node var="portal" uuid="${param['portalID']}"/>
+    <jcr:nodeProperty node="${portal}" name="source" var="sourceFolder"/>
+    <jcr:nodeProperty node="${portal}" name="thumbnailImg" var="thumbnailImg"/>
+    <jcr:nodeProperty node="${portal}" name="fullPageImg" var="fullPageImg"/>
+    <jcr:nodeProperty node="${portal}" name="itemLimit" var="itemLimit"/>
+    <jcr:nodeProperty node="${portal}" name="allowSubDirectories" var="allowSubDirectories"/>
+</c:if>
+
 <div class="headline"><h2><fmt:message key="mediaportal.similarphotos"/></h2></div>
 <c:choose>
     <c:when test="${not empty moduleMap.currentList && functions:length(moduleMap.currentList) > 0}">
         <ul class="list-inline blog-photostream margin-bottom-50">
-            <c:forEach items="${moduleMap.currentList}" var="subchild" begin="${moduleMap.begin}" end="${moduleMap.end}">
-                <c:if test="${subchild != moduleMap.tagSourceNode}">
-                    <template:module node="${subchild}" view="relatedByTag"/>
-                </c:if>
-            </c:forEach>
+            <c:choose>
+                <c:when test="${jcr:isNodeType(portal, 'jmix:masonryImageElvisConfig')}">
+                    <c:forEach items="${moduleMap.currentList}" var="imageChild">
+                        <c:if test="${thumbnailImg.string eq imageChild.properties.previewFormatName.string and subchild != moduleMap.tagSourceNode}">
+                            <template:module node="${imageChild}" view="relatedByTag.elvis" editable="false">
+                                <template:param name="thumbnailImg" value="${thumbnailImg.string}"/>
+                                <template:param name="fullPageImg" value="${fullPageImg.string}"/>
+                                <template:param name="portalID" value="${portal.identifier}"/>
+                            </template:module>
+                        </c:if>
+                    </c:forEach>
+                </c:when>
+                <c:otherwise>
+                    <c:forEach items="${moduleMap.currentList}" var="imageChild">
+                        <c:if test="${not jcr:isNodeType(imageChild, 'elvismix:file') and subchild != moduleMap.tagSourceNode}">
+                            <template:module node="${subchild}" view="relatedByTag"/>
+                        </c:if>
+                    </c:forEach>
+                </c:otherwise>
+            </c:choose>
         </ul>
     </c:when>
     <c:when test="${not empty moduleMap.emptyListMessage}">
