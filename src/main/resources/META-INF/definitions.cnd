@@ -11,6 +11,7 @@
  extends = jnt:masonryImageFromFolder
  - thumbnailImg (string) mandatory
  - fullPageImg (string) mandatory
+ - downloadFormats (string)
  - colwidth (long)
 
 [jmix:masonryImageJahiaConfig] > jmix:templateMixin mixin

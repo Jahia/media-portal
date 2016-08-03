@@ -17,10 +17,65 @@
 <%--@elvariable id="renderContext" type="org.jahia.services.render.RenderContext"--%>
 <%--@elvariable id="currentResource" type="org.jahia.services.render.Resource"--%>
 <%--@elvariable id="url" type="org.jahia.services.render.URLGenerator"--%>
+<template:addResources type="javascript" resources="download-image.js"/>
+<c:url value='${currentNode.url}' context='/' var="imgURL"/>
 
 <div class="margin-bottom-20">
-    <a class="btn rounded btn-block btn-u" href="<c:url value='${currentNode.url}' context='/'/>"  download="${currentNode.displayableName}">
-        <i class="fa fa-download"></i>&nbsp; <fmt:message key="mediaportal.download"/>
-    </a>
-</div>
 
+    <!-- Getting the portalID -->
+    <c:if test="${not empty param['portalID']}">
+        <jcr:node var="componentNode" uuid="${param['portalID']}"/>
+        <jcr:nodeProperty node="${componentNode}" name="downloadFormats" var="dformats"/>
+    </c:if>
+
+    <div class="margin-bottom-20">
+        <!-- Download Split button -->
+        <div class="btn-group download-button">
+            <a class="btn rounded btn-u dropdown-download" href="<c:url value='${imgURL}' context='/'/>" download="${currentNode.displayableName}"> <i class="fa fa-download"></i>&nbsp;&nbsp;<fmt:message key="mediaportal.download"/></a>
+            <button type="button" class="btn rounded btn-u dropdown-toggle dropdown-download" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="caret"></span>
+            </button>
+
+            <c:if test="${not empty dformats}" >
+                <ul class="dropdown-menu triangle-border top">
+                    <li>
+                        <div class="oDownload-margin">
+                            <h5>  <fmt:message key="mediaportal.download.size"/></h5>
+                        </div>
+                    </li>
+
+                    <!--  Getting the url for the image format   -->
+                    <c:set var="firstValue" value="true"/>
+                    <c:forTokens items="${dformats.string}" delims="," var="format">
+                        <c:set var="separatorPosition" value="${fn:split(imgURL,'.')}" />
+                        <c:set var="fileExtension"     value="${separatorPosition[fn:length(separatorPosition)-1]}"/>
+                        <c:set var="fileBasePath"      value="${separatorPosition[fn:length(separatorPosition)-2]}"/>
+                        <c:set var="filePathPart"      value="${fileBasePath}_EPF-FORMAT_small_"/>
+                        <c:url  var="imageFormatUrl"   value='${fileBasePath}_EPF-FORMAT_${format}_${fileExtension}' context='/'/>
+
+                        <li>
+                            <input type="radio"
+                                   id="<c:if test="${firstValue}">radio_1</c:if>"
+                                   class="radioType"
+                                   style="margin: 0 10px 0 10px;"
+                                   name="download-format"
+                                   data-url="${imageFormatUrl}">
+                            <label>${format}</label>
+                        </li>
+                        <c:set var="firstValue" value="false"/>
+                    </c:forTokens>
+
+                    <!--  Download Button    -->
+                    <li>
+                        <div  class="oDownload-margin" style="float: right;" >
+                            <a id="button-download" class="btn rounded btn-block btn-u btn-oDownload" href="#" download="${currentNode.displayableName}">
+                                <fmt:message key="mediaportal.download"/>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </c:if>
+        </div>
+    </div>
+
+</div>

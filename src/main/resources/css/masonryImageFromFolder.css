@@ -108,3 +108,88 @@
 .boxclose:before {
     content: "×";
 }
+
+/* Elvis download format */
+
+.oDownload-margin {
+    margin: 0 10px 0 10px;
+}
+.btn-oDownload{
+    font-size: 12px;
+    width: 70px;
+    padding: 5px 5px;
+}
+
+.download-button{
+    width: 100%;
+}
+.download-button > .dropdown-download{
+    width: 85%;
+}
+.download-button > .dropdown-toggle{
+    width: 15%;
+}
+.download-button .dropdown-menu {
+    margin-top: 18px;
+    width: 99%;
+    text-transform: capitalize;
+}
+.download-button > .caret{
+    display: inline;
+    padding-bottom: 13px;
+    padding-top: 13px;
+}
+.btn-group > .btn + .dropdown-download {
+    margin-left: -3px;
+    height: 32px;
+    -webkit-border-radius: 0px 4px 4px 0px !important;
+    -moz-border-radius: 0px 4px 4px 0px !important;;
+    border-radius: 0px 4px 4px 0px !important;;
+    border-left: solid 1px #ffffff !important;
+}
+
+.triangle-border.top::before {
+    border-width: 0 13px 14px;
+    bottom: auto;
+    left: auto;
+    right: 5%;
+    top: -15px;
+}
+.triangle-border::before {
+    border-color: lightgrey transparent;
+    border-style: solid;
+    border-width: 20px 20px 0;
+    bottom: -20px;
+    content: "";
+    display: block;
+    left: 40px;
+    position: absolute;
+    width: 0;
+}
+.triangle-border.top::after {
+    border-width: 0 13px 13px;
+    bottom: auto;
+    left: auto;
+    right: 5%;
+    top: -13px;
+}
+.triangle-border::after {
+    border-color: #fff transparent;
+    border-style: solid;
+    border-width: 13px 13px 0;
+    bottom: -13px;
+    content: "";
+    display: block;
+    left: 47px;
+    position: absolute;
+    width: 0;
+}
+.triangle-border {
+    background: #fff none repeat scroll 0 0;
+    border: 1px solid lightgrey;
+    border-radius: 4px;
+    color: #333;
+    margin: 1em 0 3em;
+    padding: 15px;
+    position: relative;
+}
