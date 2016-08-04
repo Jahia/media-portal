@@ -60,10 +60,10 @@
                         <c:choose>
                             <c:when test="${fn:contains(fileBasePath, '_EPF-FORMAT_')}">
                                 <c:set var="originalFormat" value="${fn:split(fn:substringAfter(fileBasePath,'FORMAT_'),'_')[1]}"/>
-                                <c:url var="imageFormatUrl" value="${fn:substringBefore(fileBasePath, '_EPF')}_EPF-FORMAT_${format}_${originalFormat}.${fileExtension}" context="/"/>
+                                <c:url var="imageFormatUrl" value="${fn:substringBefore(fileBasePath, '_EPF')}_EPF-FORMAT_${fn:trim(format)}_${originalFormat}.${fileExtension}" context="/"/>
                             </c:when>
                             <c:otherwise>
-                                <c:url  var="imageFormatUrl" value='${fileBasePath}_EPF-FORMAT_${format}_${fileExtension}.${fileExtension}' context='/'/>
+                                <c:url  var="imageFormatUrl" value='${fileBasePath}_EPF-FORMAT_${fn:trim(format)}_${fileExtension}.${fileExtension}' context='/'/>
                             </c:otherwise>
                         </c:choose>
 
@@ -74,7 +74,7 @@
                                    style="margin: 0 10px 0 10px;"
                                    name="download-format"
                                    data-url="${imageFormatUrl}">
-                            <label>${format}</label>
+                            <label>${fn:trim(format)}</label>
                         </li>
                         <c:set var="firstValue" value="false"/>
                     </c:forTokens>
