@@ -29,6 +29,13 @@
     </c:if>
 
     <div class="margin-bottom-20">
+        <c:choose>
+            <c:when test="${empty dformats}">
+        <a class="btn rounded btn-block btn-u" href="<c:url value='${currentNode.url}' context='/'/>"  download="${currentNode.displayableName}">
+            <i class="fa fa-download"></i>&nbsp; <fmt:message key="mediaportal.download"/>
+        </a>
+            </c:when>
+        <c:otherwise>
         <!-- Download Split button -->
         <div class="btn-group download-button">
             <a class="btn rounded btn-u dropdown-download" href="<c:url value='${imgURL}' context='/'/>" download="${currentNode.displayableName}"> <i class="fa fa-download"></i>&nbsp;&nbsp;<fmt:message key="mediaportal.download"/></a>
@@ -36,7 +43,6 @@
                 <span class="caret"></span>
             </button>
 
-            <c:if test="${not empty dformats}" >
                 <ul class="dropdown-menu triangle-border top">
                     <li>
                         <div class="oDownload-margin">
@@ -50,8 +56,8 @@
                         <c:set var="separatorPosition" value="${fn:split(imgURL,'.')}" />
                         <c:set var="fileExtension"     value="${separatorPosition[fn:length(separatorPosition)-1]}"/>
                         <c:set var="fileBasePath"      value="${separatorPosition[fn:length(separatorPosition)-2]}"/>
-                        <c:set var="filePathPart"      value="${fileBasePath}_EPF-FORMAT_small_"/>
-                        <c:url  var="imageFormatUrl"   value='${fileBasePath}_EPF-FORMAT_${format}_${fileExtension}' context='/'/>
+                        <c:set var="filePathPart"      value="${fileBasePath}"/>
+                        <c:url  var="imageFormatUrl"   value='${fileBasePath}_EPF-FORMAT_${format}.${fileExtension}' context='/'/>
 
                         <li>
                             <input type="radio"
@@ -74,8 +80,9 @@
                         </div>
                     </li>
                 </ul>
-            </c:if>
         </div>
+        </c:otherwise>
+        </c:choose>
     </div>
 
 </div>
