@@ -56,10 +56,16 @@
                         <c:set var="separatorPosition" value="${fn:split(imgURL,'.')}" />
                         <c:set var="fileExtension"     value="${separatorPosition[fn:length(separatorPosition)-1]}"/>
                         <c:set var="fileBasePath"      value="${separatorPosition[fn:length(separatorPosition)-2]}"/>
-                        <c:if test="${fn:contains(fileBasePath, '_EPF-FORMAT_')}">
-                            <c:set var="fileBasePath"  value="${fn:substringBefore(fileBasePath, '_EPF')}"/>
-                        </c:if>
-                        <c:url  var="imageFormatUrl"   value='${fileBasePath}_EPF-FORMAT_${format}_${fileExtension}.${fileExtension}' context='/'/>
+
+                        <c:choose>
+                            <c:when test="${fn:contains(fileBasePath, '_EPF-FORMAT_')}">
+                                <c:set var="originalFormat" value="${fn:split(fn:substringAfter(fileBasePath,'FORMAT_'),'_')[1]}"/>
+                                <c:url var="imageFormatUrl" value="${fn:substringBefore(fileBasePath, '_EPF')}_EPF-FORMAT_${format}_${originalFormat}.${fileExtension}" context="/"/>
+                            </c:when>
+                            <c:otherwise>
+                                <c:url  var="imageFormatUrl" value='${fileBasePath}_EPF-FORMAT_${format}_${fileExtension}.${fileExtension}' context='/'/>
+                            </c:otherwise>
+                        </c:choose>
 
                         <li>
                             <input type="radio"
