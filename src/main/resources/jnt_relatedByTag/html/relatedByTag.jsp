@@ -30,7 +30,7 @@
     <c:when test="${not empty moduleMap.currentList && functions:length(moduleMap.currentList) > 0}">
         <ul class="list-inline blog-photostream margin-bottom-50">
             <c:choose>
-                <c:when test="${jcr:isNodeType(portal, 'jmix:masonryImageElvisConfig')}">
+                <c:when test="${not empty portal and jcr:isNodeType(portal, 'jmix:masonryImageElvisConfig')}">
                     <c:forEach items="${moduleMap.currentList}" var="imageChild">
                         <c:if test="${thumbnailImg.string eq imageChild.properties.previewFormatName.string and subchild != moduleMap.tagSourceNode}">
                             <template:module node="${imageChild}" view="relatedByTag.elvis" editable="false">

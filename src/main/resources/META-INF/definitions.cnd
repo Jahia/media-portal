@@ -17,6 +17,7 @@
 [jmix:masonryImageJahiaConfig] > jmix:templateMixin mixin
  extends = jnt:masonryImageFromFolder
  - thumbnailType  (string, choicelist[resourceBundle]) = 'thumbnail' < 'thumbnail', 'thumbnail2'
+ - allowTagging (boolean)
 
 [jnt:relatedByTag] > jnt:relatedTagging, jmix:bindedComponent
  - j:type (string, choicelist[nodetypes='ALL']) indexed=no

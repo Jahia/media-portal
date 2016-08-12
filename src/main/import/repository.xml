@@ -41,6 +41,9 @@
                                     <display-tags j:view="mediaportal"
                                       jcr:mixinTypes="jmix:renderable"
                                       jcr:primaryType="jnt:displayTags"/>
+                                    <add-tag j:view="mediaPortal"
+                                 jcr:mixinTypes="jmix:renderable"
+                                 jcr:primaryType="jnt:tagging"/>
                                     <main-resource-display-2 j:mainResourceView="backButton"
                                                  jcr:primaryType="jnt:mainResourceDisplay"/>
                                 </section--container--row--grid-side>

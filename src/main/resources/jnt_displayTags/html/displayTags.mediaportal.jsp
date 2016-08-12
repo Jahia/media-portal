@@ -20,6 +20,7 @@
 <c:if test="${not empty param['portalID']}">
     <jcr:node var="portal" uuid="${param['portalID']}"/>
     <c:set var="portalPage" value="${jcr:findDisplayableNode(portal,renderContext )}"/>
+    <jcr:nodeProperty node="${portal}" name="allowTagging" var="allowTagging"/>
 </c:if>
 
 <c:set var="boundComponent"
@@ -29,11 +30,11 @@
     <div id="tagThisPage${boundComponent.identifier}" class="tagthispage">
 
         <jcr:nodeProperty node="${boundComponent}" name="j:tagList" var="assignedTags"/>
-        <c:if test="${not nodeLocked}">
+        <c:if test="${not nodeLocked and allowTagging.boolean}">
             <template:tokenizedForm allowsMultipleSubmits="true">
                 <form id="deleteTagForm_${fn:replace(boundComponent.identifier, "-", "_")}" action="<c:url value="${url.base}${boundComponent.path}"/>.removeTag.do" method="post">
-                    <input type="hidden" name="tag">
-                    <input type="hidden" name="unescape">
+                    <input type="text" name="tag" style="display: none;">
+                    <input type="text" name="unescape" style="display: none;">
                 </form>
             </template:tokenizedForm>
             <script type="text/javascript">
@@ -53,12 +54,18 @@
         </c:if>
         <div class="tagged">
             <div class="headline"><h2><fmt:message key="label.tags"/></h2></div>
+             <span id="jahia-tags-${boundComponent.identifier}">
                 <c:choose>
                     <c:when test="${not empty assignedTags}">
                         <ul class="list-inline tags-v2 margin-bottom-20">
                             <c:forEach items="${assignedTags}" var="tag" varStatus="status">
                                 <li>
-                                    <a href="<c:url value="${url.base}${portalPage.url}" context="/"/>?tags=${fn:escapeXml(tag.string)}"> ${fn:escapeXml(tag.string)} </a>
+                                    <a href="<c:url value="${url.base}${portalPage.url}" context="/"/>?tags=${fn:escapeXml(tag.string)}">${fn:escapeXml(tag.string)}</a>
+                                    <c:if test="${not nodeLocked and allowTagging.boolean}">
+                                        <span class="boxclose" title="<fmt:message key="mediaportal.remove"/>"
+                                              onclick="deleteTag_${fn:replace(boundComponent.identifier, "-", "_")} (this); return false;"
+                                              data-tag="${fn:escapeXml(tag.string)}" href="#"></span>
+                                    </c:if>
                                 </li>
                             </c:forEach>
                         </ul>
@@ -68,6 +75,7 @@
                                 key="label.tags.notag"/></span>
                     </c:otherwise>
                 </c:choose>
+                </span>
             </span>
         </div>
     </div>
