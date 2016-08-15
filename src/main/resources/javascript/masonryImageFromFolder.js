@@ -24,6 +24,13 @@ $( document ).ready(function() {
         window.location.search=$.trim(removeFilter(window.location.search, tags));
     });
 
+    $('.formKeyPress').on('keyup keypress', function(e) {
+        var keyCode = e.keyCode || e.which;
+        if (keyCode === 13) {
+            e.preventDefault();
+            return false;
+        }
+    });
 });
 //endsWith function for ie support
 function endsWith(str, suffix) {

@@ -14,6 +14,8 @@
 <%--@elvariable id="currentResource" type="org.jahia.services.render.Resource"--%>
 <%--@elvariable id="url" type="org.jahia.services.render.URLGenerator"--%>
 <%--@elvariable id="acl" type="java.lang.String"--%>
+<template:addResources type="javascript" resources="masonryImageFromFolder.js"/>
+
 <c:if test="${not empty param['portalID']}">
     <jcr:node var="portal" uuid="${param['portalID']}"/>
     <jcr:nodeProperty node="${portal}" name="allowTagging" var="allowTagging"/>
@@ -97,7 +99,7 @@
     </script>
     <c:if test="${renderContext.user.name != 'guest'}">
         <template:tokenizedForm allowsMultipleSubmits="true">
-            <form action="<c:url value="${url.base}${boundComponent.path}"/>.addTag.do" method="post">
+            <form  class="formKeyPress" action="<c:url value="${url.base}${boundComponent.path}"/>.addTag.do" method="post">
                 <label><fmt:message key="label.add.tags"/></label>
                 <input type="text" name="tag" class="newTagInput${currentNode.identifier}"/>
                 <input type="button" title="<fmt:message key='add'/>" value="<fmt:message key='add'/>" class="button"
